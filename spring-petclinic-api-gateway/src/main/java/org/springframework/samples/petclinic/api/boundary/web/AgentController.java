@@ -35,7 +35,8 @@ public class AgentController {
     private final BedrockAgentCoreClient bedrockClient;
     private final String sessionId;
 
-    public AgentController(String region) {
+    public AgentController(@Value("${aws.region:us-east-1}") String region) {
+        this.awsRegion = region;
         this.bedrockClient = BedrockAgentCoreClient.builder()
                 .region(Region.of(awsRegion))
                 .credentialsProvider(software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider.builder().build())
